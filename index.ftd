@@ -1,0 +1,40 @@
+-- optional string $title:
+-- optional string $description:
+-- optional string $date:
+-- boolean $pre-release: false
+
+
+-- ftd.text-input:
+placeholder: Enter title
+$on-input$: $ftd.set-string($a = $title, v = $VALUE)
+
+-- ftd.text-input:
+placeholder: Enter description
+$on-input$: $ftd.set-string($a = $description, v = $VALUE)
+
+-- ftd.text-input:
+placeholder: Enter date
+$on-input$: $ftd.set-string($a = $date, v = $VALUE)
+
+-- ftd.text:
+text: Pre Release is set. Click to unset it.
+text if { !pre-release }: Pre Release is not set. Click to set it.
+$on-click$: $ftd.toggle($a = $pre-release)
+
+-- ftd.text: Submit
+if: { title != NULL && date != NULL }
+;; $on-click$: $insert-release(title=$title, description=$description, date=$date, pre_release=$pre-release)
+link: $insert-release(title=$title, description=$description, date=$date, pre_release=$pre-release)
+
+
+-- string insert-release(title, description, date, pre_release):
+ftd.string-field title:
+ftd.string-field description:
+ftd.string-field date:
+ftd.boolean-field pre_release:
+
+"/insert/?title=" + title + "&description=" + description + "&date=" + date + "&pre_release=" + pre_release
+
+;; ftd.search("/insert/", ("title", title), ("description", description), ("date", date), ("pre_release", pre_release))
+
+;; ftd.http("/insert/", "POST", null, ("title", title), ("description", description), ("date", date), ("pre_release", pre_release))

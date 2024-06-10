@@ -1,0 +1,39 @@
+-- import: fastn/processors as pr
+
+-- record release-data:
+string title:
+optional string description:
+string date:
+integer pre_release:
+
+
+-- release-data list data:
+any: 7
+$processor$: pr.sql-query
+
+SELECT title, description, date, pre_release from release;
+
+
+-- show-release: $obj
+for: $obj in $data
+
+
+
+-- component show-release:
+caption release-data data:
+
+-- ftd.column:
+border-width.px: 2
+
+-- ftd.text: $show-release.data.title
+
+-- ftd.text: $show-release.data.description
+if: { show-release.data.description != NULL }
+
+-- ftd.text: $show-release.data.date
+
+-- ftd.integer: $show-release.data.pre_release
+
+-- end: ftd.column
+
+-- end: show-release

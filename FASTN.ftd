@@ -1,0 +1,15 @@
+-- import: fastn
+
+-- fastn.package: release-app
+
+
+
+-- fastn.migration: create-release-table
+
+CREATE TABLE release (
+    id INTEGER PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT,
+    date TEXT NOT NULL,
+    pre_release BOOLEAN DEFAULT 0
+);

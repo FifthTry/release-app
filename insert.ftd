@@ -1,0 +1,37 @@
+-- import: fastn/processors as pr
+
+-- string title:
+$processor$: pr.request-data
+
+-- optional string description:
+$processor$: pr.request-data
+
+-- string date:
+$processor$: pr.request-data
+
+-- boolean pre_release:
+$processor$: pr.request-data
+
+
+-- integer insert-release:
+title: $title
+description: $description
+date: $date
+pre_release: $pre_release
+$processor$: pr.sql-execute
+
+INSERT INTO release (title, description, date, pre_release)
+VALUES
+($title, $description, $date, $pre_release);
+
+
+
+-- ftd.redirect: /releases/
+code: 307
+if: { insert-release == 1 }
+
+
+
+/-- ftd.permanent-redirect: /releases/
+if: { insert-release == 1 }
+

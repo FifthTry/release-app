@@ -1,40 +1,47 @@
--- record release-data:
-optional string title:
-optional string description:
-optional string date:
-boolean pre-release:
+-- ftd.string-field $title: title
+$value: *$ftd.empty
 
+-- ftd.string-field $description: description
+$value: *$ftd.empty
 
--- release-data $data:
-pre-release: false
+-- ftd.string-field $date: date
+$value: *$ftd.empty
+
+-- ftd.boolean-field $pre-release: pre_release
+$value: false
 
 
 -- ftd.text-input:
 placeholder: Enter title
-$on-input$: $ftd.set-string($a = $data.title, v = $VALUE)
+$on-input$: $ftd.set-string($a = $title.value, v = $VALUE)
 
 -- ftd.text-input:
 placeholder: Enter description
 multiline: true
-$on-input$: $ftd.set-string($a = $data.description, v = $VALUE)
+$on-input$: $ftd.set-string($a = $description.value, v = $VALUE)
 
 -- ftd.text-input:
 placeholder: Enter date
-$on-input$: $ftd.set-string($a = $data.date, v = $VALUE)
+$on-input$: $ftd.set-string($a = $date.value, v = $VALUE)
 
 
 
 -- ftd.text:
 text: Pre Release is set. Click to unset it.
-text if { !data.pre-release }: Pre Release is not set. Click to set it.
-$on-click$: $ftd.toggle($a = $data.pre-release)
+text if { !pre-release.value }: Pre Release is not set. Click to set it.
+$on-click$: $ftd.toggle($a = $pre-release.value)
 
 -- ftd.text: Submit
-if: { data.title != NULL && data.date != NULL }
-$on-click$: $insert-release(data = $data)
+if: { title.value != "" && date.value != "" }
+$on-click$: $insert-release(title=$title, description=$description, date=$date, pre_release=$pre-release)
 
 
--- void insert-release(data):
-release-data data:
+-- void insert-release(title, description, date, pre_release):
+ftd.string-field title:
+ftd.string-field description:
+ftd.string-field date:
+ftd.boolean-field pre_release:
 
-ftd.navigate("/insert/", data)
+ftd.submit_form(
+    "/insert/", title, description, date, pre_release
+)

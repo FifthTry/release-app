@@ -28,10 +28,10 @@ link: $insert-release(title=$title, description=$description, date=$date, pre_re
 
 
 -- string insert-release(title, description, date, pre_release):
-string title:
-string description:
-string date:
-boolean pre_release:
+ftd.string-field title:
+ftd.string-field description:
+ftd.string-field date:
+ftd.boolean-field pre_release:
 
 "/insert/?title=" + title + "&description=" + description + "&date=" + date + "&pre_release=" + pre_release
 

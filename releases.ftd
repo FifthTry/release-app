@@ -11,7 +11,7 @@ integer pre_release:
 any: 7
 $processor$: pr.sql-query
 
-SELECT title, description, date, pre_release from release;
+SELECT title, description, date, pre_release FROM release ORDER BY id DESC;
 
 
 -- show-release: $obj

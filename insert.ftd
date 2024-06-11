@@ -19,6 +19,7 @@ description: $description
 date: $date
 pre_release: $pre_release
 $processor$: pr.sql-execute
+$always-include$: true
 
 INSERT INTO release (title, description, date, pre_release)
 VALUES
@@ -26,12 +27,5 @@ VALUES
 
 
 
--- ftd.redirect: /releases/
-code: 307
-if: { insert-release == 1 }
-
-
-
-/-- ftd.permanent-redirect: /releases/
-if: { insert-release == 1 }
+-- ftd.permanent-redirect: /releases/
 

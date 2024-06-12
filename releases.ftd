@@ -4,14 +4,14 @@
 string title:
 optional string description:
 string date:
-boolean pre_release:
+boolean is-public:
 
 
 -- release-data list data:
 any: 7
 $processor$: pr.sql-query
 
-SELECT title, description, date, pre_release FROM release ORDER BY id DESC;
+SELECT title, description, date, is_public FROM release ORDER BY id DESC;
 
 
 -- show-release: $obj
@@ -32,7 +32,7 @@ if: { show-release.data.description != NULL }
 
 -- ftd.text: $show-release.data.date
 
--- ftd.boolean: $show-release.data.pre_release
+-- ftd.boolean: $show-release.data.is-public
 
 -- end: ftd.column
 

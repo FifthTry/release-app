@@ -1,7 +1,7 @@
 -- ftd.string-field $title: title
 -- ftd.string-field $description: description
 -- ftd.string-field $date: date
--- ftd.boolean-field $pre-release: pre_release
+-- ftd.boolean-field $is-public: is_public
 
 
 -- ftd.text-input:
@@ -20,21 +20,21 @@ $on-input$: $ftd.set-string($a = $date.value, v = $VALUE)
 
 
 -- ftd.text:
-text: Pre Release is set. Click to unset it.
-text if { !pre-release.value }: Pre Release is not set. Click to set it.
-$on-click$: $ftd.toggle($a = $pre-release.value)
+text: The release is **public**. Click to make it **private**.
+text if { !is-public.value }: The release is **private**. Click to make it **public**.
+$on-click$: $ftd.toggle($a = $is-public.value)
 
 -- ftd.text: Submit
 if: { title.value != "" && date.value != "" }
-$on-click$: $insert-release(title=$title, description=$description, date=$date, pre_release=$pre-release)
+$on-click$: $insert-release(title=$title, description=$description, date=$date, is_public=$is-public)
 
 
--- void insert-release(title, description, date, pre_release):
+-- void insert-release(title, description, date, is_public):
 ftd.string-field title:
 ftd.string-field description:
 ftd.string-field date:
-ftd.boolean-field pre_release:
+ftd.boolean-field is_public:
 
 ftd.submit_form(
-    "/insert/", title, description, date, pre_release
+    "/insert/", title, description, date, is_public
 )

@@ -9,7 +9,7 @@ $processor$: pr.request-data
 -- string date:
 $processor$: pr.request-data
 
--- boolean pre_release:
+-- boolean is_public:
 $processor$: pr.request-data
 
 
@@ -17,13 +17,13 @@ $processor$: pr.request-data
 title: $title
 description: $description
 date: $date
-pre_release: $pre_release
+is_public: $is_public
 $processor$: pr.sql-execute
 $always-include$: true
 
-INSERT INTO release (title, description, date, pre_release)
+INSERT INTO release (title, description, date, is_public)
 VALUES
-($title, $description, $date, $pre_release);
+($title, $description, $date, $is_public);
 
 
 

@@ -11,5 +11,5 @@ CREATE TABLE release (
     title TEXT NOT NULL,
     description TEXT,
     date TEXT NOT NULL,
-    pre_release BOOLEAN DEFAULT 0
+    is_public BOOLEAN DEFAULT 0
 );

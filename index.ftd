@@ -1,14 +1,7 @@
 -- ftd.string-field $title: title
-$value: *$ftd.empty
-
 -- ftd.string-field $description: description
-$value: *$ftd.empty
-
 -- ftd.string-field $date: date
-$value: *$ftd.empty
-
 -- ftd.boolean-field $pre-release: pre_release
-$value: false
 
 
 -- ftd.text-input:
